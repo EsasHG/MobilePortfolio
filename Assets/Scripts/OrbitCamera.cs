@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public abstract class OrbitCamera : MonoBehaviour
 {
@@ -55,7 +56,9 @@ public abstract class OrbitCamera : MonoBehaviour
     
     public void Update()
     {
+
         UserInput();
+        
     }
 
     // This will do all the calculations

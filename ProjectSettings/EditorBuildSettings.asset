@@ -6,13 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/RotatingScene.unity
-    guid: e88ba8dc38c4503419f88bba3daf1274
-  - enabled: 1
     path: Assets/Scenes/VRScene.unity
     guid: 7291a1e9265c2e94f92a6e542c610b8b
   - enabled: 1
     path: Assets/Scenes/ARScene.unity
     guid: c94cf082b7d9e874a9ee6d8ad21c0b0e
+  - enabled: 1
+    path: Assets/Scenes/RotatingScene.unity
+    guid: e88ba8dc38c4503419f88bba3daf1274
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 8b84eb66121dc6c43bc5550a193d96b9, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 85ff012f84a77ff42ab22d01980ddc0b, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 3c024b9185e37624d887ee9032b814f9, type: 2}

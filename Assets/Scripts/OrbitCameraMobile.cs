@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class OrbitCameraMobile : OrbitCamera
 {
@@ -11,7 +12,9 @@ public class OrbitCameraMobile : OrbitCamera
 #endif
     public override void UserInput()
     {
-        if (Input.touchCount == 0)
+
+
+        if (Input.touchCount == 0 || EventSystem.current.currentSelectedGameObject)
         {
             return;
         }

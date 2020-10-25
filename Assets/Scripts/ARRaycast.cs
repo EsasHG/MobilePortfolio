@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -24,35 +25,30 @@ public class ARRaycast : MonoBehaviour
     }
 
     public void PerformARRaycast()
-    {
-
-
-
-        /*
-         //for not raytracing through UI
-         if (Input.touchCount > 0 && !EventSystem.current.currentSelectedGameObject)
-
-         */
-        if (manager.Raycast(Input.GetTouch(0).position,raycastHitList,TrackableType.All))
+    {   
+        //for not raytracing through UI
+        if (Input.touchCount > 0 && !EventSystem.current.currentSelectedGameObject)
         {
-            Vector3 hitPosition = raycastHitList[0].pose.position;
-
-            string result = "";
-            switch(Input.GetTouch(0).phase)
+            if (manager.Raycast(Input.GetTouch(0).position,raycastHitList,TrackableType.All))
             {
-                case TouchPhase.Began:
-                    result = "Touch Began!" + hitPosition.ToString();
-                    hitDetected?.Invoke(hitPosition);
-                    break;
-                case TouchPhase.Moved:
-                    result = "Touch Moved!" + hitPosition.ToString();
-                    hitMoved?.Invoke(hitPosition);
-                    break;
-                case TouchPhase.Ended:
-                    result = "Touch Ended!" + hitPosition.ToString();
-                    hitEnd?.Invoke();
-                    break;
-                default: break;
+                Vector3 hitPosition = raycastHitList[0].pose.position;
+                string result = "";
+                switch(Input.GetTouch(0).phase)
+                {
+                    case TouchPhase.Began:
+                        result = "Touch Began!" + hitPosition.ToString();
+                        hitDetected?.Invoke(hitPosition);
+                        break;
+                    case TouchPhase.Moved:
+                        result = "Touch Moved!" + hitPosition.ToString();
+                        hitMoved?.Invoke(hitPosition);
+                        break;
+                    case TouchPhase.Ended:
+                        result = "Touch Ended!" + hitPosition.ToString();
+                        hitEnd?.Invoke();
+                        break;
+                    default: break;
+                }
             }
         }
         raycastHitList.Clear();

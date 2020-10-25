@@ -14,8 +14,11 @@ public class RotatingSelector : MonoBehaviour
 
     public float radius = 2.0f;
     public float rotateSpeed = 0.3f;
+    public float modelRotateSpeed = 50;
     private float degreeOffset = 0;
     public Transform RotateParent = null;
+
+    private bool rotateModel = false;
 
     private DOTween rotationTween;
     float CurrentTargetAngle = 0.0f;
@@ -31,10 +34,16 @@ public class RotatingSelector : MonoBehaviour
         }
         ChangeModel(0);
     }
-
+    private void Update()
+    {
+        if (rotateModel)
+            RotateCurrentModel();
+    }
     public void Next()
     {
-        if (modelIndex == models.Count - 1)
+
+        Debug.Log("Next Model!");
+        if (modelIndex >= models.Count - 1)
             ChangeModel(0);
         else
             ChangeModel(modelIndex + 1);
@@ -42,7 +51,9 @@ public class RotatingSelector : MonoBehaviour
 
     public void Previous()
     {
-        if (modelIndex == 0)
+        Debug.Log("Prev Model!");
+
+        if (modelIndex <= 0)
             ChangeModel(models.Count - 1);
         else
             ChangeModel(modelIndex - 1);
@@ -50,11 +61,24 @@ public class RotatingSelector : MonoBehaviour
 
     public void ChangeModel(int index)
     {
+        Debug.Log("Change Model!");
+
         int moveIndex = index - modelIndex;
         RotateParent.DOKill();
         CurrentTargetAngle += degreeOffset * moveIndex;
         modelIndex = index;
         RotateParent.DORotate(new Vector3(0, CurrentTargetAngle, 0), rotateSpeed);
         modelChanged?.Invoke(models[modelIndex]);
-    }   
+    }
+
+    public void RotateCurrentModel()
+    {
+        Vector3 rot = models[modelIndex].transform.localRotation.eulerAngles;
+        models[modelIndex].transform.localRotation = Quaternion.Euler(rot.x, rot.y + modelRotateSpeed * Time.deltaTime, rot.z);
+    }
+
+    public void ToggleRotation()
+    {
+        rotateModel = !rotateModel;
+    }
 }

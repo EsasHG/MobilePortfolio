@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
-    private GameObject spawnedObject;
-
     public List<GameObject> models = new List<GameObject>();
     int modelIndex = 0;
 
     private bool isSpawned = false;
 
+    public void Start()
+    {
+        foreach (GameObject model in models)
+            model.SetActive(false);
+    }
+
     public void SpawnObject(Vector3 spawnPos)
     {
-        spawnedObject = Instantiate(models[modelIndex], spawnPos, Quaternion.identity);
+        models[modelIndex].transform.position = spawnPos;
+        models[modelIndex].SetActive(true);
         isSpawned = true;
     }
 
     public void MoveObject(Vector3 newPos)
     {
         if(isSpawned)
-            spawnedObject.transform.position = newPos;
+            models[modelIndex].transform.position = newPos;
     }
 
     public void EndMove()

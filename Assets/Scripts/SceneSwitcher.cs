@@ -12,23 +12,6 @@ public class SceneSwitcher : MonoBehaviour
     public Color solidColor = new Color(0,0,0,1);
     public Color transparentColor = new Color(0,0,0,0);
 
-
-    //private static SceneSwitcher s_Instance = null;
-
-    //void Awake()
-    //{
-    //    if (s_Instance == null)
-    //    {
-    //        s_Instance = this;
-    //        DontDestroyOnLoad(gameObject);
-
-    //        //Initialization code goes here[/INDENT]
-    //    }
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
     private void Start()
     {
         FadeFromBlack();
